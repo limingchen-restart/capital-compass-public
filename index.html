@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="CapitalCompass is a Python investment research assistant with local and remote AI models. Learn about the project and request access to its private source repository.">
+    <meta name="color-scheme" content="light">
+    <title>CapitalCompass | Research with context</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #192e30;
+        --muted: #526465;
+        --green: #185b48;
+        --border: #d9e2dc;
+        --paper: #fafbf8;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+        line-height: 1.65;
+      }
+      a { color: var(--green); text-underline-offset: 4px; }
+      a:hover { text-decoration-thickness: 2px; }
+      a:focus-visible { outline: 3px solid #a9511d; outline-offset: 5px; }
+      .wrap { width: min(1080px, calc(100% - 48px)); margin-inline: auto; }
+      .skip {
+        position: absolute;
+        top: -80px;
+        left: 24px;
+        padding: 10px 16px;
+        background: white;
+        z-index: 1;
+      }
+      .skip:focus { top: 12px; }
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding-block: 24px;
+        border-bottom: 1px solid var(--border);
+      }
+      .brand { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 19px; }
+      .mark {
+        display: grid;
+        place-items: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        background: var(--green);
+        color: white;
+        font-size: 13px;
+        letter-spacing: 1px;
+      }
+      nav { display: flex; flex-wrap: wrap; gap: 24px; font-size: 14px; }
+      nav a { color: var(--ink); text-decoration: none; }
+      .hero { padding-block: 86px 64px; max-width: 810px; }
+      .eyebrow {
+        display: inline-block;
+        margin: 0 0 24px;
+        border: 1px solid #bcd0c4;
+        border-radius: 24px;
+        padding: 5px 13px;
+        color: var(--green);
+        background: #eef5ee;
+        font-size: 12px;
+        font-weight: 650;
+        letter-spacing: .04em;
+      }
+      h1 {
+        font-size: clamp(40px, 6.4vw, 72px);
+        line-height: 1.08;
+        letter-spacing: -.045em;
+        margin: 0 0 24px;
+        font-weight: 650;
+      }
+      h1 span { color: var(--green); }
+      .lead { color: var(--muted); font-size: 19px; max-width: 680px; margin: 0 0 28px; }
+      .actions { display: flex; align-items: center; flex-wrap: wrap; gap: 20px; }
+      .button {
+        display: inline-block;
+        padding: 12px 21px;
+        border-radius: 9px;
+        background: var(--green);
+        color: white;
+        font-size: 15px;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .button:hover { background: #104735; }
+      .fine { color: var(--muted); font-size: 13px; }
+      .hero .fine { margin-top: 18px; }
+      .features { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+      .card { border: 1px solid var(--border); background: white; border-radius: 14px; padding: 26px; }
+      .number { color: var(--green); font-size: 12px; font-weight: 650; letter-spacing: .08em; }
+      h2 { margin: 0 0 16px; font-size: clamp(25px, 3vw, 33px); line-height: 1.2; letter-spacing: -.025em; }
+      h3 { margin: 14px 0 12px; font-size: 18px; line-height: 1.4; }
+      .card p { margin: 0; color: var(--muted); font-size: 15px; }
+      .section { padding-block: 60px; border-bottom: 1px solid var(--border); }
+      .section > p { max-width: 720px; color: var(--muted); }
+      .access {
+        margin-top: 60px;
+        padding: 36px;
+        border-radius: 16px;
+        background: #eef3ee;
+        border: 1px solid var(--border);
+      }
+      .access > p { max-width: 720px; color: var(--muted); }
+      ol { padding-left: 23px; margin-block: 24px; }
+      li { padding-left: 7px; margin-bottom: 12px; }
+      .privacy-warning { font-size: 14px; max-width: 740px; }
+      .faq { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px; margin-top: 28px; }
+      .faq h3 { margin-top: 0; }
+      .faq p { color: var(--muted); font-size: 15px; margin-bottom: 0; }
+      footer { padding-block: 32px; color: var(--muted); font-size: 13px; }
+      footer p { margin: 0 0 12px; max-width: 860px; }
+      footer a { margin-right: 20px; }
+      @media (max-width: 720px) {
+        .wrap { width: calc(100% - 36px); }
+        header { align-items: flex-start; flex-direction: column; gap: 14px; }
+        nav { gap: 20px; }
+        .hero { padding-block: 48px 36px; }
+        .lead { font-size: 17px; }
+        .features, .faq { grid-template-columns: 1fr; }
+        .section { padding-block: 40px; }
+        .access { margin-top: 40px; padding: 24px; }
+        .actions { align-items: flex-start; flex-direction: column; gap: 14px; }
+      }
+      @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="wrap">
+      <header>
+        <div class="brand"><span class="mark" aria-hidden="true">CC</span>CapitalCompass</div>
+        <nav aria-label="Main navigation">
+          <a href="#project">The project</a>
+          <a href="#access">Request access</a>
+          <a href="#questions">Questions</a>
+        </nav>
+      </header>
+      <main id="main">
+        <section class="hero" aria-labelledby="hero-title">
+          <p class="eyebrow">PYTHON RESEARCH ASSISTANT / PRIVATE SOURCE</p>
+          <h1 id="hero-title">Research with context.<br><span>Decide with care.</span></h1>
+          <p class="lead">
+            CapitalCompass brings AI models, market research and optional portfolio
+            context into one chat-first workspace. Run it locally, explore the
+            evidence and stay in control.
+          </p>
+          <div class="actions">
+            <a class="button" href="https://github.com/limingchen-restart/capital-compass-public/issues/new?template=access-request.yml">Request repository access</a>
+            <a href="#project">Explore the project</a>
+          </div>
+          <p class="fine">Access requests are public GitHub issues. Approval is manual, not guaranteed.</p>
+        </section>
+        <section id="project" aria-labelledby="project-title">
+          <h2 id="project-title">One workspace. Your research workflow.</h2>
+          <div class="features">
+            <article class="card">
+              <span class="number">01 / MODELS</span>
+              <h3>Choose where AI runs</h3>
+              <p>Use local Ollama models or a remote OpenAI-compatible endpoint. Local inference does not make external research tools offline.</p>
+            </article>
+            <article class="card">
+              <span class="number">02 / EVIDENCE</span>
+              <h3>Research beyond a prompt</h3>
+              <p>Explore Yahoo Finance research data and opt-in web search. Follow evidence and check source dates, subject to provider terms.</p>
+            </article>
+            <article class="card">
+              <span class="number">03 / CONTEXT</span>
+              <h3>Bring your portfolio into view</h3>
+              <p>Optional Plaid-based holdings integration provides read-only context. Broker features require your own credentials and appropriate provider permissions.</p>
+            </article>
+          </div>
+        </section>
+        <section class="section" aria-labelledby="control-title">
+          <h2 id="control-title">Built for research, with you in control.</h2>
+          <p>
+            A Python, single-user application with local conversation history,
+            configurable research settings, execution activity and a Stop control.
+            You decide whether to include portfolio context or use web search.
+            No trades are executed.
+          </p>
+          <p>
+            <strong>Planned, not available:</strong> user-authorized trading and
+            tax-document downloads and summaries. These require additional provider
+            permissions, safeguards and legal review before implementation.
+          </p>
+        </section>
+        <section id="access" class="access" aria-labelledby="access-title">
+          <h2 id="access-title">Request access to the private repository.</h2>
+          <p>
+            This public repository hosts project information only. The application
+            source remains in the private CapitalCompass repository. Access is
+            reviewed by its owner.
+          </p>
+          <ol>
+            <li><strong>Sign in to GitHub</strong> with the account you want to use.</li>
+            <li><strong>Submit an access request</strong> using the form below. Choose your intended use and add optional, non-sensitive context.</li>
+            <li><strong>Wait for review.</strong> If approved, the owner sends a GitHub repository invitation. Accept it to gain access.</li>
+          </ol>
+          <div class="actions">
+            <a class="button" href="https://github.com/limingchen-restart/capital-compass-public/issues/new?template=access-request.yml">Open access-request form</a>
+            <a href="https://github.com/limingchen-restart/capital-compass">Already invited? Open CapitalCompass</a>
+          </div>
+          <p class="privacy-warning">
+            <strong>Public request, not a private support channel.</strong>
+            Your GitHub username, request and comments are visible to others.
+            Do not include passwords, API keys, account numbers, holdings, tax
+            documents, email addresses or other private personal information.
+            The form does not grant access automatically.
+          </p>
+        </section>
+        <section id="questions" class="section" aria-labelledby="questions-title">
+          <h2 id="questions-title">Before you request access</h2>
+          <div class="faq">
+            <article>
+              <h3>Why does the private link show 404?</h3>
+              <p>GitHub normally hides private repositories from people without access. Submit a request here rather than expecting a permission page at that link.</p>
+            </article>
+            <article>
+              <h3>Is this a hosted investment service?</h3>
+              <p>No. This is a project landing page. Approved access provides repository access, not a hosted account, broker subscription or financial-adviser relationship.</p>
+            </article>
+            <article>
+              <h3>Can the app place trades?</h3>
+              <p>No. The current application is read-only. Research suggestions are not orders, suitability determinations or guarantees of returns.</p>
+            </article>
+            <article>
+              <h3>Does access include market-data rights?</h3>
+              <p>No. Model licenses, broker permissions, search terms and market-data rights remain separate. Review the project's financial-risk and privacy notices before using the app.</p>
+            </article>
+          </div>
+        </section>
+      </main>
+      <footer>
+        <p>
+          CapitalCompass is for investment research, not a substitute for qualified
+          financial, legal or tax advice. AI and market data can be wrong or outdated.
+          Investing involves risk of loss. Verify information independently.
+        </p>
+        <a href="https://github.com/limingchen-restart/capital-compass-public">Public project repository</a>
+        <a href="https://github.com/limingchen-restart/capital-compass-public/issues/new?template=access-request.yml">Request access</a>
+      </footer>
+    </div>
+  </body>
+</html>
