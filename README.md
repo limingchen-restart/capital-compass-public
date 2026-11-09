@@ -77,13 +77,19 @@ application, chat databases, credentials or financial data into it.
 
 ### Local preview
 
-From this repository's directory:
+This previews only the static landing page using Python's built-in file server.
+It does not start the CapitalCompass application or require its dependencies.
+Use port 8001 to avoid conflicting with an application running on port 8000:
 
 ```powershell
-python -m http.server 8000 --bind 127.0.0.1
+Set-Location "C:\Code\capital-compass-public"
+python -m http.server 8001 --bind 127.0.0.1
 ```
 
-Open http://127.0.0.1:8000/ and stop the server with Ctrl+C when finished.
+Open http://127.0.0.1:8001/ and stop the server with Ctrl+C when finished.
+If that port is also unavailable, choose another, such as 8765, and use the
+matching port in your browser URL. Do not stop another application just to
+preview the page. Once published, GitHub Pages hosts it without a local server.
 
 ## Maintainer: reviewing access requests
 
